@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="show_sql">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="hibernate.connection.username">hassan</property>
+        <property name="hibernate.connection.password">43192431</property>
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost/homework9crud?createDatabaseIfNotExist=true
+        </property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="ir.maktab.entities.User"/>
+        <mapping class="ir.maktab.entities.Article"/>
+        <mapping class="ir.maktab.entities.Category"/>
+        <mapping class="ir.maktab.entities.Role"/>
+        <mapping class="ir.maktab.entities.Tag"/>
+    </session-factory>
+</hibernate-configuration>
