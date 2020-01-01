@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="042f18ca-d426-466d-9131-ab0c96071619" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/repositories/RoleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homework9crud.iml" beforeDir="false" afterPath="$PROJECT_DIR$/homework9crud.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ir/maktab/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ir/maktab/config/repositories/CrudRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/config/repositories/CrudRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ir/maktab/entities/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/entities/Article.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ir/maktab/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ir/maktab/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ir/maktab/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ir/maktab/config/repositories/CrudRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ir/maktab/config/repositories/CrudRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ir/maktab/entities/Article.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ir/maktab/entities/Article.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ir/maktab/repositories/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ir/maktab/repositories/UserRepository.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +90,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Application">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ir.maktab.Application" />
+      <module name="homework9crud" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ir.maktab.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TestApplication" />
       <module name="homework9crud" />
@@ -95,6 +113,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Application" />
         <item itemvalue="Application.TestApplication" />
       </list>
     </recent_temporary>
@@ -125,7 +144,7 @@
       <option name="presentableId" value="Default" />
       <updated>1577817732320</updated>
       <workItem from="1577817735782" duration="1480000" />
-      <workItem from="1577825852567" duration="4385000" />
+      <workItem from="1577825852567" duration="22656000" />
     </task>
     <servers />
   </component>

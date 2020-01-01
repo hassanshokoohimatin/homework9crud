@@ -1,7 +1,12 @@
 package ir.maktab.repositories;
 
+import ir.maktab.config.HibernateUtil;
 import ir.maktab.config.repositories.CrudRepository;
 import ir.maktab.entities.User;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class UserRepository extends CrudRepository<User, Long> {
 
@@ -16,5 +21,8 @@ public class UserRepository extends CrudRepository<User, Long> {
     @Override
     protected Class<User> getEntityClass() {
         return User.class;
+    }
+    private Session getSession() {
+        return HibernateUtil.getSession();
     }
 }

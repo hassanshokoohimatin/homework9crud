@@ -55,6 +55,7 @@ public abstract class CrudRepository<Entity , ID extends Serializable> {
         return entities;
     }
 
+
     public List<Entity> findAll(int start, int row) {
         getSession().beginTransaction();
         Query<Entity> query = getSession()

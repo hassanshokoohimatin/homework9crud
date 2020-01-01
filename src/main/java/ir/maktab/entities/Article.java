@@ -54,9 +54,11 @@ public class Article {
 
     @Override
     public String toString() {
-        System.out.print("Article{"+ id);
-        for(Tag t : tags){
-            System.out.printf("%s%s\t","tag : ",t.getTitle());
+        System.out.print("Article{"+ id +'}' + "tags : ");
+        if (tags.size()!=0) {
+            for (Tag t : tags) {
+                System.out.printf("%s\t\t", t.getTitle());
+            }
         }
         return
                 ", title : " + title +
