@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="042f18ca-d426-466d-9131-ab0c96071619" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homework9crud.iml" beforeDir="false" afterPath="$PROJECT_DIR$/homework9crud.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ir/maktab/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ir/maktab/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ir/maktab/entities/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/entities/Article.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ir/maktab/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ir/maktab/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/maktab/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ir/maktab/entities/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/TestApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/TestApplication.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -124,7 +123,7 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@6a522de1" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@ef670428" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
           </expand>
           <select />
@@ -145,6 +144,8 @@
       <workItem from="1577817735782" duration="1480000" />
       <workItem from="1577825852567" duration="28267000" />
       <workItem from="1577866294836" duration="1705000" />
+      <workItem from="1577890101616" duration="2754000" />
+      <workItem from="1577909726972" duration="6572000" />
     </task>
     <servers />
   </component>

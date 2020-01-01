@@ -59,7 +59,8 @@ public class Article {
             for (Tag t : tags) {
                 System.out.printf("%s\t\t", t.getTitle());
             }
-        }
+        }else
+            System.out.print("no tags");
         return
                 ", title : " + title +
                         ", content : " + content +

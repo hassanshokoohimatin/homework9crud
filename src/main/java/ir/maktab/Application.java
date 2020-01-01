@@ -22,7 +22,7 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         String manner = "";
         while ( ! manner.equals("exit")){
-            System.out.print("Sign in\nSign up\nSee articles\nexit\n");
+            System.out.println("Sign in\nSign up\nSee articles\nexit\n");
             manner = scanner.nextLine();
             if (manner.equals("sign up")){
 
@@ -44,9 +44,8 @@ public class Application {
                     if (existUserCount == 0) {
                         System.out.println("Enter birthday : ");
                         String birthday = scanner.next();
-                        Role role = new Role(null,"writer");
                         List<Role> roleList = new ArrayList<>();
-                        roleList.add(role);
+                        roleList.add(roleRepository.findById(2L));
                         User user = new User(null, username, nationalCode, birthday, nationalCode,null,roleList);
                         userRepository.save(user);
                         System.out.println("signed up successfully...you can sign in now as a writer");
@@ -132,7 +131,7 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         int command = 0;
         while(command!=13) {
-            System.out.println("You signed in as an admin...choose an action");
+            System.out.println("You signed in as an adminWriter...choose an action");
             System.out.println("1.See all articles\n2.Publish an article\n3.Publish off an article\n4.Remove an article\n" +
                     "5.Create a category\n6.Create a tag\n7.Change the role of users\n8.Change password\n9.See your articles\n10.Enter new article\n" +
                     "11.Edit article\n12.Dashboard\n13.exit");
@@ -143,7 +142,7 @@ public class Application {
             }
             if (command==2){
                 articleRepository.findAll().stream().
-                        filter(Article->Article.getIsPublished().equals("no")||Article.getIsPublished().equals(null)).
+                        filter(Article->Article.getIsPublished().equals("no")).
                         forEach(Article-> System.out.println(Article));
 
                 System.out.print("Which article do you want to publish?\nEnter id : ");
@@ -283,7 +282,9 @@ public class Application {
                 String publishDate = scanner.next();
                 article.setPublishDate(publishDate);
                 article.setLastUpdateDate(new Date().toString());
-                article.setIsPublished(null);
+                System.out.println("Enter publishing condition : (yes or no)");
+                String isPublished = scanner.next();
+                article.setIsPublished(isPublished);
 
                 List<Category> categories = categoryRepository.findAll();
                 System.out.println("id\t\t\ttitle");
@@ -305,17 +306,21 @@ public class Application {
                     System.out.printf("%d\t\t\t%s\n",t.getId(),t.getTitle());
                 }
                 System.out.println("Which tags do you want to add?...enter 0 to end entering id...");
-                List<Tag> tags = null;
-                int tagChoice = 1;
-                while (tagChoice != 0){
-                    tagChoice = scanner.nextInt();
+                List<Tag> tags = new ArrayList<>();
+                int choice = 1;
+                while (choice!=0){
+                    choice = scanner.nextInt();
                     try {
-                        tags.add(tagList.get(tagChoice - 1));
-                        System.out.println("added");
+                        tags.add(tagList.get(choice - 1));
+                        System.out.print("added");
                     }catch (Exception e){
-                        System.out.println("done");
+                        if (choice==0)
+                            System.out.print("done");
+                        else
+                            System.out.print("failed!!!");
                     }
                 }
+
                 article.setTags(tags);
 
                 articleRepository.save(article);
@@ -365,14 +370,18 @@ public class Application {
                     System.out.printf("%d\t\t\t%s\n",t.getId(),t.getTitle());
                 }
                 System.out.println("Which tags do you want to add?...enter 0 to end entering id...");
-                List<Tag> tags = null;
-                int tagChoice = 1;
-                while (tagChoice != 0){
-                    tagChoice = scanner.nextInt();
+                List<Tag> tags = new ArrayList<>();
+                int choice = 1;
+                while (choice!=0){
+                    choice = scanner.nextInt();
                     try {
-                        tags.add(tagList.get(tagChoice - 1));
+                        tags.add(tagList.get(choice - 1));
+                        System.out.print("added");
                     }catch (Exception e){
-                        System.out.println();
+                        if (choice==0)
+                            System.out.print("done");
+                        else
+                            System.out.print("failed!!!");
                     }
                 }
                 article.setTags(tags);
@@ -422,7 +431,7 @@ public class Application {
             }
             if (command==2){
                 articleRepository.findAll().stream().
-                        filter(Article->Article.getIsPublished().equals("no")||Article.getIsPublished().equals(null)).
+                        filter(Article->Article.getIsPublished().equals("no")).
                         forEach(Article-> System.out.println(Article));
 
                 System.out.print("Which article do you want to publish?\nEnter id : ");
@@ -555,7 +564,7 @@ public class Application {
                 String publishDate = scanner.next();
                 article.setPublishDate(publishDate);
                 article.setLastUpdateDate(new Date().toString());
-                article.setIsPublished(null);
+                article.setIsPublished("no");
 
                 List<Category> categories = categoryRepository.findAll();
                 System.out.println("id\t\t\ttitle");
@@ -585,7 +594,10 @@ public class Application {
                         tags.add(tagList.get(tagChoice - 1));
                         System.out.println("added");
                     }catch (Exception e){
-                        System.out.println("done");
+                        if (tagChoice==0)
+                            System.out.println("Done");
+                        else
+                            System.out.println("Failed!!!");
                     }
                 }
                 article.setTags(tags);
