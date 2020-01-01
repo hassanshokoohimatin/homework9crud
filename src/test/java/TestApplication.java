@@ -50,23 +50,23 @@ public class TestApplication {
         Article article2 = new Article(null,"title2","brief2","content2","2018",
                 "2018-01-01","2018","yes",user2,category2,tagList3);
 
-//        roleRepository.save(role1);
-//        roleRepository.save(role2);
-//
-//        tagRepository.save(tag1);
-//        tagRepository.save(tag2);
-//        tagRepository.save(tag3);
-//
-//        userRepository.save(user1);
-//        userRepository.save(user2);
-//        userRepository.save(user3);
-//
-//        categoryRepository.save(category1);
-//        categoryRepository.save(category2);
-//
-//        articleRepository.save(article1);
-//        articleRepository.save(article2);
-//
+        roleRepository.save(role1);
+        roleRepository.save(role2);
+
+        tagRepository.save(tag1);
+        tagRepository.save(tag2);
+        tagRepository.save(tag3);
+
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+
+        categoryRepository.save(category1);
+        categoryRepository.save(category2);
+
+        articleRepository.save(article1);
+        articleRepository.save(article2);
+
         category1.setDescription("about object-oriented languages");
         category2.setDescription("modern theories");
 
