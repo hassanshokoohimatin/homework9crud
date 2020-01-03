@@ -2,11 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="042f18ca-d426-466d-9131-ab0c96071619" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/articlemanagement/impl/EditArticleImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/articlemanagement/impl/EnterNewArticleImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/articlemanagement/impl/SeeArticlesByUserIdImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/articlemanagement/usecase/EditArticle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/articlemanagement/usecase/EnterNewArticle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/articlemanagement/usecase/SeeArticlesByUserId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/usermanagement/impl/ChangePasswordImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/usermanagement/impl/DashboardImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/usermanagement/usecase/ChangePassword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/features/usermanagement/usecase/Dashboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homework9crud.iml" beforeDir="false" afterPath="$PROJECT_DIR$/homework9crud.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ir/maktab/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ir/maktab/entities/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/maktab/entities/Article.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ir/maktab/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ir/maktab/Application.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/TestApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/TestApplication.class" afterDir="false" />
@@ -31,16 +41,16 @@
     <expand>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="homework9crud@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="homework9crud@localhost [2]" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="homework9crud@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="homework9crud@localhost [2]" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="homework9crud@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="homework9crud@localhost [2]" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="homework9crud: schema" type="76f4a085:MysqlImplModel$Schema" />
       </path>
@@ -50,6 +60,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -120,12 +131,7 @@
     <option name="allServicesViewState">
       <serviceView>
         <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@ef670428" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-          </expand>
+          <expand />
           <select />
         </treeState>
       </serviceView>
@@ -145,7 +151,14 @@
       <workItem from="1577825852567" duration="28267000" />
       <workItem from="1577866294836" duration="1705000" />
       <workItem from="1577890101616" duration="2754000" />
-      <workItem from="1577909726972" duration="6572000" />
+      <workItem from="1577909726972" duration="7072000" />
+      <workItem from="1577949502582" duration="727000" />
+      <workItem from="1577983658257" duration="5552000" />
+      <workItem from="1578030037669" duration="4965000" />
+      <workItem from="1578040924839" duration="2016000" />
+      <workItem from="1578043727618" duration="700000" />
+      <workItem from="1578048976245" duration="3335000" />
+      <workItem from="1578055944786" duration="1197000" />
     </task>
     <servers />
   </component>

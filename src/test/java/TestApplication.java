@@ -23,9 +23,9 @@ public class TestApplication {
 //        Role role1 = new Role(null , "admin");
 //        Role role2 = new Role(null , "writer");
 //
-//        Tag tag1 = new Tag(null,"java");
-//        Tag tag2 = new Tag(null,"c##");
-//        Tag tag3 = new Tag(null,"hibernate");
+        Tag tag1 = new Tag(null,"java");
+        Tag tag2 = new Tag(null,"c##");
+        Tag tag3 = new Tag(null,"hibernate");
 //
 //        roleList1.add(role1);
 //        roleList1.add(role2);
@@ -53,9 +53,9 @@ public class TestApplication {
 //        roleRepository.save(role1);
 //        roleRepository.save(role2);
 //
-//        tagRepository.save(tag1);
-//        tagRepository.save(tag2);
-//        tagRepository.save(tag3);
+        tagRepository.save(tag1);
+        tagRepository.save(tag2);
+        tagRepository.save(tag3);
 //
 //        userRepository.save(user1);
 //        userRepository.save(user2);

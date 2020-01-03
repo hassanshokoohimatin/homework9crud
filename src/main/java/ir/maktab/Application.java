@@ -1,6 +1,16 @@
 package ir.maktab;
 
 import ir.maktab.entities.*;
+import ir.maktab.features.articlemanagement.impl.EditArticleImpl;
+import ir.maktab.features.articlemanagement.impl.EnterNewArticleImpl;
+import ir.maktab.features.articlemanagement.impl.SeeArticlesByUserIdImpl;
+import ir.maktab.features.articlemanagement.usecase.EditArticle;
+import ir.maktab.features.articlemanagement.usecase.EnterNewArticle;
+import ir.maktab.features.articlemanagement.usecase.SeeArticlesByUserId;
+import ir.maktab.features.usermanagement.impl.ChangePasswordImpl;
+import ir.maktab.features.usermanagement.impl.DashboardImpl;
+import ir.maktab.features.usermanagement.usecase.ChangePassword;
+import ir.maktab.features.usermanagement.usecase.Dashboard;
 import ir.maktab.repositories.*;
 import ir.maktab.share.AuthenticationService;
 
@@ -22,9 +32,9 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         String manner = "";
         while ( ! manner.equals("exit")){
-            System.out.println("Sign in\nSign up\nSee articles\nexit\n");
-            manner = scanner.nextLine();
-            if (manner.equals("sign up")){
+            System.out.println("Signin\nSignup\narticles\nexit\n");
+            manner = scanner.next();
+            if (manner.equals("signup")){
 
 
                 User loginUser = AuthenticationService.getInstance().getLoginUser();
@@ -59,7 +69,7 @@ public class Application {
                     System.out.println("signed out successfully...");
                 }
             }
-            if(manner.equals("see articles")){
+            if(manner.equals("articles")){
 
                 List<Article> articles = articleRepository.findAll();
 
@@ -73,19 +83,17 @@ public class Application {
                     System.out.println("enter the id of the article too see more detail or press 0 to back to main menu");
                     Long id = scanner.nextLong();
                     if (id != 0) {
-                        for (Article a : articles) {
-                            if (id == a.getId()) {
-                                System.out.println(articleRepository.findById(id));
-                                break;
-                            }
-                        }
+
+                        articleRepository.findAll().stream().
+                                filter(Article->Article.getId()==id).
+                                forEach(Article-> System.out.println(Article));
                     }
                 }
             }
             if (manner.equals("exit")){
                 System.out.println("END");
             }
-            if (manner.equals("sign in")){
+            if (manner.equals("signin")){
                 User loginUser = AuthenticationService.getInstance().getLoginUser();
                 if (loginUser == null) {
                     System.out.println("Enter username : ");
@@ -106,16 +114,10 @@ public class Application {
                     } else {
                         //After successful sign in
                         if (loginUser.getRoles().size()==1){
-                            if (loginUser.getRoles().get(0).getTitle().equals("admin")){
-                                admin(loginUser);
-                            }
-                            else{
-                                writer(loginUser);
-                            }
+                            if (loginUser.getRoles().get(0).getTitle().equals("admin")){ admin(loginUser); }
+                            else{ writer(loginUser); }
                         }
-                        else{
-                            adminWriter(loginUser);
-                        }
+                        else{ adminWriter(loginUser); }
                     }
                 }else
                 {
@@ -232,186 +234,30 @@ public class Application {
 
             }
             if (command==8){
-
-                System.out.println("Enter your old password : ");
-                String oldPassword = scanner.next();
-                if (user.getPassword().equals(oldPassword)) {
-                    System.out.println("Enter new password");
-                    String newPassword = scanner.next();
-                    user.setPassword(newPassword);
-                    userRepository.update(user);
-                    System.out.println("password changed successfully...");
-                } else {
-                    System.out.println("Wrong password...you can not change it");
-                }
-
+                ChangePassword changePassword = new ChangePasswordImpl();
+                changePassword.changePass(user);
             }
             if (command==9){
-                List<Article> articles = null;
-                try {
-                    articles = articleRepository.findAll().stream().
-                            filter(Article -> Article.getUser().getId() == user.getId()).
-                            collect(Collectors.toList());
-                }catch (Exception e){}
 
-                if (articles.size() == 0)
-                    System.out.println("You dont have any articles...");
-                else {
-                    for (Article a : articles) {
-                        System.out.println(a);
-                    }
-                }
+                SeeArticlesByUserId seeArticlesByUserId = new SeeArticlesByUserIdImpl();
+                seeArticlesByUserId.listArticles(user);
             }
             if (command==10){
-                Article article = new Article();
-                article.setId(null);
-                article.setUser(user);
-                System.out.println("Enter title : ");
-                String title = scanner.next();
-                article.setTitle(title);
-                System.out.println("Enter brief : ");
-                String brief = scanner.next();
-                article.setBrief(brief);
-                System.out.println("Enter content : ");
-                String content = scanner.next();
-                article.setContent(content);
-                System.out.println("Enter create date : ");
-                String createDate = scanner.next();
-                article.setCreateDate(createDate);
-                System.out.println("Enter publish date : ");
-                String publishDate = scanner.next();
-                article.setPublishDate(publishDate);
-                article.setLastUpdateDate(new Date().toString());
-                System.out.println("Enter publishing condition : (yes or no)");
-                String isPublished = scanner.next();
-                article.setIsPublished(isPublished);
-
-                List<Category> categories = categoryRepository.findAll();
-                System.out.println("id\t\t\ttitle");
-                for (Category c : categories) {
-                    System.out.printf("%d\t\t\t%s\n", c.getId(), c.getTitle());
-                }
-                System.out.println("Enter the id of category to add");
-                int categoryChoice = scanner.nextInt();
-                try {
-                    article.setCategory(categories.get(categoryChoice - 1));
-                    System.out.println("category added...");
-                }catch (Exception e){
-                    System.out.println("failed to add category");
-                }
-
-                List<Tag> tagList = tagRepository.findAll();
-                System.out.println("id\t\t\ttitle");
-                for (Tag t : tagList){
-                    System.out.printf("%d\t\t\t%s\n",t.getId(),t.getTitle());
-                }
-                System.out.println("Which tags do you want to add?...enter 0 to end entering id...");
-                List<Tag> tags = new ArrayList<>();
-                int choice = 1;
-                while (choice!=0){
-                    choice = scanner.nextInt();
-                    try {
-                        tags.add(tagList.get(choice - 1));
-                        System.out.print("added");
-                    }catch (Exception e){
-                        if (choice==0)
-                            System.out.print("done");
-                        else
-                            System.out.print("failed!!!");
-                    }
-                }
-
-                article.setTags(tags);
-
-                articleRepository.save(article);
+                EnterNewArticle enterNewArticle = new EnterNewArticleImpl();
+                enterNewArticle.createArticle(user);
             }
             if (command==11){
-                List<Article> articles = null;
-                try {
-                    articles = articleRepository.findAll().stream().
-                            filter(Article -> Article.getUser().getId() == user.getId()).
-                            collect(Collectors.toList());
-                }catch (Exception e){}
-
-                if (articles.size() == 0)
-                    System.out.println("You dont have any articles...");
-                else {
-                    for (Article a : articles) {
-                        System.out.println(a);
-                    }
-                }
-
-                System.out.println("Enter the id of article you want to edit...");
-                Long id = scanner.nextLong();
-                Article article = articleRepository.findById(id);
-                System.out.println("Enter new title : ");
-                String title = scanner.next();
-                article.setTitle(title);
-                System.out.println("Enter new brief : ");
-                String brief = scanner.next();
-                article.setBrief(brief);
-                System.out.println("Enter new content : ");
-                String content = scanner.next();
-                article.setContent(content);
-
-                List<Category> categories = categoryRepository.findAll();
-                System.out.println("id\t\t\ttitle");
-                for (Category c : categories) {
-                    System.out.printf("%d\t\t\t%s\n", c.getId(), c.getTitle());
-                }
-                System.out.println("Enter the id of category for adding to your article...");
-                int categoryChoice = scanner.nextInt();
-                article.setCategory(categories.get(categoryChoice - 1));
-                article.setLastUpdateDate(new Date().toString());
-
-                List<Tag> tagList = tagRepository.findAll();
-                System.out.println("id\t\t\ttitle");
-                for (Tag t : tagList){
-                    System.out.printf("%d\t\t\t%s\n",t.getId(),t.getTitle());
-                }
-                System.out.println("Which tags do you want to add?...enter 0 to end entering id...");
-                List<Tag> tags = new ArrayList<>();
-                int choice = 1;
-                while (choice!=0){
-                    choice = scanner.nextInt();
-                    try {
-                        tags.add(tagList.get(choice - 1));
-                        System.out.print("added");
-                    }catch (Exception e){
-                        if (choice==0)
-                            System.out.print("done");
-                        else
-                            System.out.print("failed!!!");
-                    }
-                }
-                article.setTags(tags);
-
-                articleRepository.update(article);
+                EditArticle editArticle = new EditArticleImpl();
+                editArticle.editArticle(user);
             }
             if (command==12){
+                Dashboard dashboard = new DashboardImpl();
+                dashboard.dashboard(user);
+            }
 
-                System.out.println("choose a number to see  details...\n1.See number of all of your articles\n" +
-                        "2.See number of all of your published articles");
-                int dashboardChoice = scanner.nextInt();
-                if (dashboardChoice == 1) {
-                    Long count = 0L;
-                    try {
-                        count = articleRepository.findAll().stream().
-                                filter(Article -> Article.getUser().getId().equals(user.getId())).
-                                count();
-                    }catch (Exception e){}
-                    System.out.printf("%s%d\n","Number of all of your articles : ",count);
-
-                } else if (dashboardChoice == 2) {
-                    Long count = 0L;
-                    try {
-                        count = articleRepository.findAll().stream().
-                                filter(Article -> Article.getUser().getId().equals(user.getId())).
-                                filter(Article -> Article.getIsPublished().equals("yes")).
-                                count();
-                    }catch (Exception e){}
-                    System.out.printf("%s%d\n","Number of all of your published articles : ",count);
-                }
+            if (command==13){
+                AuthenticationService.getInstance().setLoginUser(null);
+                System.out.println("signing out...Back to main menu...");
             }
         }
 
@@ -500,19 +346,12 @@ public class Application {
 
             }
             if (command==8){
-
-                System.out.println("Enter your old password : ");
-                String oldPassword = scanner.next();
-                if (user.getPassword().equals(oldPassword)) {
-                    System.out.println("Enter new password");
-                    String newPassword = scanner.next();
-                    user.setPassword(newPassword);
-                    userRepository.update(user);
-                    System.out.println("password changed successfully...");
-                } else {
-                    System.out.println("Wrong password...you can not change it");
-                }
-
+                ChangePassword changePassword = new ChangePasswordImpl();
+                changePassword.changePass(user);
+            }
+            if (command==9){
+                AuthenticationService.getInstance().setLoginUser(null);
+                System.out.println("signing out...Back to main menu...");
             }
         }
 
@@ -526,189 +365,36 @@ public class Application {
                     "\n6.exit");
             command = scanner.nextInt();
             if (command == 1){
-                List<Article> articles = null;
-                try {
-                            articles = articleRepository.findAll().stream().
-                            filter(Article -> Article.getUser().getId() == user.getId()).
-                            collect(Collectors.toList());
-                }catch (Exception e){}
-
-                if (articles.size() == 0)
-                    System.out.println("You dont have any articles...");
-                else {
-                    for (Article a : articles) {
-                        System.out.println(a);
-                    }
-                }
+                SeeArticlesByUserId seeArticlesByUserId = new SeeArticlesByUserIdImpl();
+                seeArticlesByUserId.listArticles(user);
             }
 
 
             if (command == 2){
-
-                Article article = new Article();
-                article.setId(null);
-                article.setUser(user);
-                System.out.println("Enter title : ");
-                String title = scanner.next();
-                article.setTitle(title);
-                System.out.println("Enter brief : ");
-                String brief = scanner.next();
-                article.setBrief(brief);
-                System.out.println("Enter content : ");
-                String content = scanner.next();
-                article.setContent(content);
-                System.out.println("Enter create date : ");
-                String createDate = scanner.next();
-                article.setCreateDate(createDate);
-                System.out.println("Enter publish date : ");
-                String publishDate = scanner.next();
-                article.setPublishDate(publishDate);
-                article.setLastUpdateDate(new Date().toString());
-                article.setIsPublished("no");
-
-                List<Category> categories = categoryRepository.findAll();
-                System.out.println("id\t\t\ttitle");
-                for (Category c : categories) {
-                    System.out.printf("%d\t\t\t%s\n", c.getId(), c.getTitle());
-                }
-                System.out.println("Enter the id of category to add");
-                int categoryChoice = scanner.nextInt();
-                try {
-                    article.setCategory(categories.get(categoryChoice - 1));
-                    System.out.println("category added...");
-                }catch (Exception e){
-                    System.out.println("failed to add category");
-                }
-
-                List<Tag> tagList = tagRepository.findAll();
-                System.out.println("id\t\t\ttitle");
-                for (Tag t : tagList){
-                    System.out.printf("%d\t\t\t%s\n",t.getId(),t.getTitle());
-                }
-                System.out.println("Which tags do you want to add?...enter 0 to end entering id...");
-                List<Tag> tags = null;
-                int tagChoice = 1;
-                while (tagChoice != 0){
-                    tagChoice = scanner.nextInt();
-                    try {
-                        tags.add(tagList.get(tagChoice - 1));
-                        System.out.println("added");
-                    }catch (Exception e){
-                        if (tagChoice==0)
-                            System.out.println("Done");
-                        else
-                            System.out.println("Failed!!!");
-                    }
-                }
-                article.setTags(tags);
-
-                articleRepository.save(article);
+                EnterNewArticle enterNewArticle = new EnterNewArticleImpl();
+                enterNewArticle.createArticle(user);
             }
 
 
             if (command == 3){
-
-                List<Article> articles = null;
-                try {
-                    articles = articleRepository.findAll().stream().
-                            filter(Article -> Article.getUser().getId() == user.getId()).
-                            collect(Collectors.toList());
-                }catch (Exception e){}
-
-                if (articles.size() == 0)
-                    System.out.println("You dont have any articles...");
-                else {
-                    for (Article a : articles) {
-                        System.out.println(a);
-                    }
-                }
-
-                    System.out.println("Enter the id of article you want to edit...");
-                    Long id = scanner.nextLong();
-                    Article article = articleRepository.findById(id);
-                    System.out.println("Enter new title : ");
-                    String title = scanner.next();
-                    article.setTitle(title);
-                    System.out.println("Enter new brief : ");
-                    String brief = scanner.next();
-                    article.setBrief(brief);
-                    System.out.println("Enter new content : ");
-                    String content = scanner.next();
-                    article.setContent(content);
-
-                    List<Category> categories = categoryRepository.findAll();
-                    System.out.println("id\t\t\ttitle");
-                    for (Category c : categories) {
-                        System.out.printf("%d\t\t\t%s\n", c.getId(), c.getTitle());
-                    }
-                    System.out.println("Enter the id of category for adding to your article...");
-                    int categoryChoice = scanner.nextInt();
-                    article.setCategory(categories.get(categoryChoice - 1));
-                    article.setLastUpdateDate(new Date().toString());
-
-                    List<Tag> tagList = tagRepository.findAll();
-                    System.out.println("id\t\t\ttitle");
-                    for (Tag t : tagList){
-                        System.out.printf("%d\t\t\t%s\n",t.getId(),t.getTitle());
-                    }
-                    System.out.println("Which tags do you want to add?...enter 0 to end entering id...");
-                    List<Tag> tags = null;
-                    int tagChoice = 1;
-                    while (tagChoice != 0){
-                        tagChoice = scanner.nextInt();
-                        try {
-                            tags.add(tagList.get(tagChoice - 1));
-                        }catch (Exception e){
-                            System.out.println();
-                        }
-                    }
-                    article.setTags(tags);
-
-                    articleRepository.update(article);
+                EditArticle editArticle = new EditArticleImpl();
+                editArticle.editArticle(user);
             }
 
 
             if (command == 4){
-
-                System.out.println("Enter your old password : ");
-                String oldPassword = scanner.next();
-                if (user.getPassword().equals(oldPassword)) {
-                    System.out.println("Enter new password");
-                    String newPassword = scanner.next();
-                    user.setPassword(newPassword);
-                    userRepository.update(user);
-                    System.out.println("password changed successfully...");
-                } else {
-                    System.out.println("Wrong password...you can not change it");
-                }
-
+                ChangePassword changePassword = new ChangePasswordImpl();
+                changePassword.changePass(user);
             }
 
 
             if (command == 5){
-
-                System.out.println("choose a number to see  details...\n1.See number of all of your articles\n" +
-                        "2.See number of all of your published articles");
-                int dashboardChoice = scanner.nextInt();
-                if (dashboardChoice == 1) {
-                    Long count = 0L;
-                    try {
-                        count = articleRepository.findAll().stream().
-                                filter(Article -> Article.getUser().getId().equals(user.getId())).
-                                count();
-                    }catch (Exception e){}
-                    System.out.printf("%s%d\n","Number of all of your articles : ",count);
-
-                } else if (dashboardChoice == 2) {
-                    Long count = 0L;
-                    try {
-                        count = articleRepository.findAll().stream().
-                                filter(Article -> Article.getUser().getId().equals(user.getId())).
-                                filter(Article -> Article.getIsPublished().equals("yes")).
-                                count();
-                    }catch (Exception e){}
-                    System.out.printf("%s%d\n","Number of all of your published articles : ",count);
-                }
+                Dashboard dashboard = new DashboardImpl();
+                dashboard.dashboard(user);
+            }
+            if (command == 6){
+                AuthenticationService.getInstance().setLoginUser(null);
+                System.out.println("signing out...Back to main menu...");
             }
         }
     }
